@@ -8,7 +8,6 @@
     <property name="page_increment">1</property>
   </object>
   <object class="GtkDialog" id="zenity_scale_dialog">
-    <property name="visible">True</property>
     <property name="can_focus">False</property>
     <property name="border_width">5</property>
     <property name="title" translatable="yes">Adjust the scale value</property>
