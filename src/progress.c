@@ -282,6 +282,7 @@ zenity_text_size_allocate (
 void
 zenity_progress (ZenityData *data, ZenityProgressData *progress_data) {
 	GtkWidget *dialog;
+	GtkWindow *window;
 	GtkWidget *button;
 	GObject *text;
 	GObject *progress_bar;
@@ -299,8 +300,10 @@ zenity_progress (ZenityData *data, ZenityProgressData *progress_data) {
 
 	text = gtk_builder_get_object (builder, "zenity_progress_text");
 
+	window = GTK_WINDOW (gtk_window_new (GTK_WINDOW_TOPLEVEL));
 	dialog =
 		GTK_WIDGET (gtk_builder_get_object (builder, "zenity_progress_dialog"));
+	gtk_window_set_transient_for (GTK_WINDOW (dialog), window);
 
 	progress_bar = gtk_builder_get_object (builder, "zenity_progress_bar");
 

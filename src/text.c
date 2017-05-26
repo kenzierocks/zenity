@@ -234,6 +234,7 @@ void
 zenity_text (ZenityData *data, ZenityTextData *text_data) {
 	GtkBuilder *builder;
 	GtkWidget *dialog;
+	GtkWindow *window;
 	GtkWidget *ok_button;
 	GtkWidget *checkbox;
 	GtkWidget *cancel_button;
@@ -258,8 +259,10 @@ zenity_text (ZenityData *data, ZenityTextData *text_data) {
 
 	gtk_builder_connect_signals (builder, NULL);
 
+	window = GTK_WINDOW (gtk_window_new(GTK_WINDOW_TOPLEVEL));
 	dialog =
 		GTK_WIDGET (gtk_builder_get_object (builder, "zenity_text_dialog"));
+	gtk_window_set_transient_for(GTK_WINDOW (dialog), window);
 
 	ok_button = GTK_WIDGET (
 		gtk_builder_get_object (builder, "zenity_text_close_button"));

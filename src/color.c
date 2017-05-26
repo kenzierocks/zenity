@@ -35,12 +35,15 @@ static void zenity_colorselection_dialog_response (
 void
 zenity_colorselection (ZenityData *data, ZenityColorData *color_data) {
 	GtkWidget *dialog;
+	GtkWindow *window;
 	GtkWidget *button;
 	GdkRGBA color;
 
 	zen_data = data;
 
+	window = GTK_WINDOW (gtk_window_new (GTK_WINDOW_TOPLEVEL));
 	dialog = gtk_color_chooser_dialog_new (data->dialog_title, NULL);
+	gtk_window_set_transient_for (GTK_WINDOW (dialog), window);
 
 	g_signal_connect (G_OBJECT (dialog),
 		"response",

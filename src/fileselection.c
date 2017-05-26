@@ -35,6 +35,7 @@ static void zenity_fileselection_dialog_response (
 void
 zenity_fileselection (ZenityData *data, ZenityFileData *file_data) {
 	GtkWidget *dialog;
+	GtkWindow *window;
 	gchar *dir;
 	gchar *basename;
 	GtkFileChooserAction action = GTK_FILE_CHOOSER_ACTION_OPEN;
@@ -51,8 +52,9 @@ zenity_fileselection (ZenityData *data, ZenityFileData *file_data) {
 			action = GTK_FILE_CHOOSER_ACTION_SAVE;
 	}
 
+	window = GTK_WINDOW (gtk_window_new (GTK_WINDOW_TOPLEVEL));
 	dialog = gtk_file_chooser_dialog_new (NULL,
-		NULL,
+		window,
 		action,
 		_ ("_Cancel"),
 		GTK_RESPONSE_CANCEL,

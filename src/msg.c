@@ -79,9 +79,12 @@ void
 zenity_msg (ZenityData *data, ZenityMsgData *msg_data) {
 	GtkBuilder *builder;
 	GtkWidget *dialog;
+	GtkWindow *window;
 	GtkWidget *ok_button;
 	GObject *text;
 	GObject *image;
+
+	window = GTK_WINDOW (gtk_window_new(GTK_WINDOW_TOPLEVEL));
 
 	switch (msg_data->mode) {
 		case ZENITY_MSG_WARNING:
@@ -133,6 +136,8 @@ zenity_msg (ZenityData *data, ZenityMsgData *msg_data) {
 			g_assert_not_reached ();
 			break;
 	}
+
+	gtk_window_set_transient_for(GTK_WINDOW (dialog), window);
 
 	if (data->extra_label) {
 		gint i = 0;

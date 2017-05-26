@@ -352,6 +352,7 @@ zenity_cell_edited_callback (GtkCellRendererText *cell,
 void
 zenity_tree (ZenityData *data, ZenityTreeData *tree_data) {
 	GtkWidget *dialog;
+	GtkWindow *window;
 	GtkWidget *button;
 	GObject *tree_view;
 	GObject *text;
@@ -403,8 +404,10 @@ zenity_tree (ZenityData *data, ZenityTreeData *tree_data) {
 
 	gtk_builder_connect_signals (builder, NULL);
 
+	window = GTK_WINDOW (gtk_window_new(GTK_WINDOW_TOPLEVEL));
 	dialog =
 		GTK_WIDGET (gtk_builder_get_object (builder, "zenity_tree_dialog"));
+	gtk_window_set_transient_for(GTK_WINDOW (dialog), window);
 
 	g_signal_connect (G_OBJECT (dialog),
 		"response",

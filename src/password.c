@@ -34,6 +34,7 @@ static void zenity_password_dialog_response (
 void
 zenity_password_dialog (ZenityData *data, ZenityPasswordData *password_data) {
 	GtkWidget *dialog;
+	GtkWindow *window;
 	GtkWidget *image;
 	GtkWidget *hbox;
 	GtkWidget *vbox_labels;
@@ -42,7 +43,9 @@ zenity_password_dialog (ZenityData *data, ZenityPasswordData *password_data) {
 
 	zen_data = data;
 
+	window = GTK_WINDOW (gtk_window_new (GTK_WINDOW_TOPLEVEL));
 	dialog = gtk_dialog_new ();
+	gtk_window_set_transient_for (GTK_WINDOW (dialog), window);
 
 	if (data->extra_label) {
 		gint i = 0;

@@ -36,6 +36,7 @@ void
 zenity_scale (ZenityData *data, ZenityScaleData *scale_data) {
 	GtkBuilder *builder;
 	GtkWidget *dialog;
+	GtkWindow *window;
 	GtkWidget *button;
 	GObject *text;
 
@@ -47,8 +48,11 @@ zenity_scale (ZenityData *data, ZenityScaleData *scale_data) {
 		return;
 	}
 
+	window = GTK_WINDOW (gtk_window_new (GTK_WINDOW_TOPLEVEL));
 	dialog =
 		GTK_WIDGET (gtk_builder_get_object (builder, "zenity_scale_dialog"));
+
+	gtk_window_set_transient_for (GTK_WINDOW (dialog), window);
 	scale =
 		GTK_WIDGET (gtk_builder_get_object (builder, "zenity_scale_hscale"));
 	text = gtk_builder_get_object (builder, "zenity_scale_text");

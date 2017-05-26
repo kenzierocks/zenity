@@ -38,6 +38,7 @@ void
 zenity_calendar (ZenityData *data, ZenityCalendarData *cal_data) {
 	GtkBuilder *builder;
 	GtkWidget *dialog;
+	GtkWindow *window;
 	GtkWidget *button;
 	GObject *text;
 
@@ -52,8 +53,10 @@ zenity_calendar (ZenityData *data, ZenityCalendarData *cal_data) {
 
 	gtk_builder_connect_signals (builder, NULL);
 
+	window = GTK_WINDOW (gtk_window_new (GTK_WINDOW_TOPLEVEL));
 	dialog =
 		GTK_WIDGET (gtk_builder_get_object (builder, "zenity_calendar_dialog"));
+	gtk_window_set_transient_for (GTK_WINDOW (dialog), window);
 
 	g_signal_connect (G_OBJECT (dialog),
 		"response",
